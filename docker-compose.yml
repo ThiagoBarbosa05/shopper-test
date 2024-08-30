@@ -3,9 +3,31 @@ version: '3.8'
 services:
   postgres:
     image: bitnami/postgresql
+    container_name: postgres
     ports: 
       - 5432:5432
     environment:
       - POSTGRESQL_USERNAME=docker
       - POSTGRESQL_PASSWORD=docker
       - POSTGRESQL_DATABASE=shopper
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app
+
+  shopper-app:
+    build: .
+    container_name: shopper-app
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    networks:
+      - app
+    
+networks:
+  app:
+    driver: bridge
+
+volumes:
+  postgres_data:
