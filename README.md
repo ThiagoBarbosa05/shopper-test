@@ -15,7 +15,7 @@ Clone o projeto
 Entre no diretório do projeto
 
 ```bash
-  shopper-test
+  cd shopper-test
 ```
 
 Inicialize a aplicação no container Docker
