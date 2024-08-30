@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { z, ZodError } from "zod"
+import {z, ZodError} from "zod"
 import { makeUploadImageUseCase } from "../../../factories/make-upload-image"
 import { makeCreateMeasureUseCase } from "../../../factories/make-create-measure"
 import { GlobalErrorHandler } from "../../../core/error/global-error-handler"
@@ -41,8 +41,7 @@ export async function createMeasureController(req: Request, res: Response) {
     })
 
         
-  } catch (error) {
-    
+  } catch (error) {    
     if(error instanceof ZodError) {
       return res.status(400).send({error_code: "INVALID_DATA", error_description: "Dados incompletos/inválidos fornecidos."
       })
@@ -56,7 +55,7 @@ export async function createMeasureController(req: Request, res: Response) {
       }
     }
 
-    return res.status(500).send({error_code: "SERVER_ERROR", error_description: "Erro no servidor"
+      return res.status(500).send({error_code: "SERVER_ERROR", error_description: "Erro no servidor"
     
     })
   }
