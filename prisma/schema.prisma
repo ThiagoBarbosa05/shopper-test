@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://docker:docker@localhost:5432/shopper?schema=public"
 }
 
 enum Type {
@@ -25,7 +25,7 @@ model Measure {
   type         Type
   value        Int
   isConfirmed  Boolean  @map("is_confirmed")
+  imageUrl     String   @map("image_url")
 
-  @@unique([customerCode])
   @@map("measures")
 }
