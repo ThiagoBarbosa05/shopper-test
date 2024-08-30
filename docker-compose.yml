@@ -2,14 +2,15 @@ version: '3.8'
 
 services:
   postgres:
-    image: bitnami/postgresql
     container_name: postgres
-    ports: 
-      - 5432:5432
+    image: postgres:latest
+    ports:
+      - "5432:5432"
     environment:
-      - POSTGRESQL_USERNAME=docker
-      - POSTGRESQL_PASSWORD=docker
-      - POSTGRESQL_DATABASE=shopper
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: shopper
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -18,12 +19,12 @@ services:
   shopper-app:
     build: .
     container_name: shopper-app
-    depends_on:
-      - postgres
     ports:
       - "3000:3000"
     networks:
       - app
+    depends_on:
+      - postgres
     
 networks:
   app:

@@ -2,7 +2,7 @@ import { z } from "zod";
 import 'dotenv/config'
 
 const envSchema = z.object({
-  GEMINI_API_KEY: z.string()
+  GEMINI_API_KEY: z.string().default("GEMINI_API_KEY")
 })
 
 const _env = envSchema.safeParse(process.env)
